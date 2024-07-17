@@ -25,14 +25,14 @@ def get_sales_data():
         print("Data should be six numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60\n")
 
-        data_str = input("Input your data here:\n")
+        data_str = input("Enter your data here:\n")
 
         sales_data = data_str.split(",")
-        
+
         if validate_data(sales_data):
             print("Data is valid!")
             break
-    
+
     return sales_data
 
 
@@ -40,7 +40,7 @@ def validate_data(values):
     """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
-    or if there aren't exactly 6 values
+    or if there aren't exactly 6 values.
     """
     try:
         [int(value) for value in values]
@@ -51,13 +51,13 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
-    
+
     return True
 
 
 def update_worksheet(data, worksheet):
     """
-    Receive a list of integers to be inserted into a worksheet
+    Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
     print(f"Updating {worksheet} worksheet...\n")
@@ -70,7 +70,7 @@ def calculate_surplus_data(sales_row):
     """
     Compare sales with stock and calculate the surplus for each item type.
 
-    The surplus is defined as the sales figure substracted from the stock:
+    The surplus is defined as the sales figure subtracted from the stock:
     - Positive surplus indicates waste
     - Negative surplus indicates extra made when stock was sold out.
     """
@@ -82,13 +82,13 @@ def calculate_surplus_data(sales_row):
     for stock, sales in zip(stock_row, sales_row):
         surplus = int(stock) - sales
         surplus_data.append(surplus)
-    
+
     return surplus_data
 
 
 def get_last_5_entries_sales():
     """
-    Collect collumns of data from sales worksheet, collecting 
+    Collects columns of data from sales worksheet, collecting 
     the last 5 entries for each sandwich and returns the data
     as a list of lists.
     """
@@ -98,7 +98,7 @@ def get_last_5_entries_sales():
     for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-5:])
-    
+
     return columns
 
 
@@ -114,7 +114,7 @@ def calculate_stock_data(data):
         average = sum(int_column) / len(int_column)
         stock_num = average * 1.1
         new_stock_data.append(round(stock_num))
-    
+
     return new_stock_data
 
 
